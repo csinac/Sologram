@@ -25,7 +25,7 @@ public class CameraControl : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetMouseButton(0)) {
+        if (Input.GetMouseButton(1)) {
             if (axes == RotationAxes.MouseXAndY)
             {
                 float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
