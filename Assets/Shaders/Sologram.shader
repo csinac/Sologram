@@ -3,6 +3,7 @@
     Properties
     {
         [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
+        _BandFrequency("Band Frequency", Float) = 200
         _Color ("Tint", Color) = (1,1,1,1)
 
         _StencilComp ("Stencil Comparison", Float) = 8
@@ -80,6 +81,8 @@
             float4 _ClipRect;
             float4 _MainTex_ST;
 
+            float _BandFrequency;
+
             v2f vert(appdata_t v)
             {
                 v2f OUT;
@@ -98,6 +101,8 @@
             {
                 half4 color = (tex2D(_MainTex, IN.texcoord) + _TextureSampleAdd) * IN.color;
 
+                float bandAlpha = (sin(IN.texcoord.y * _BandFrequency) + 1) / 2;
+                
                 #ifdef UNITY_UI_CLIP_RECT
                 color.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);
                 #endif
@@ -106,7 +111,7 @@
                 clip (color.a - 0.001);
                 #endif
 
-                return color;
+                return color * bandAlpha;
             }
         ENDCG
         }
