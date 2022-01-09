@@ -65,7 +65,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _GlitchCount: 1
+    - _GlitchCount: 5
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -85,6 +85,12 @@ Material:
     - _StencilWriteMask: 255
     - _UVSec: 0
     - _UseUIAlphaClip: 0
+    - _VignetteBoost: 1
+    - _VignetteFoo: 0.5
+    - _VignetteScale: 0.05
+    - _VignetteSize: 0.1
+    - _VignetteSpeed: 95.6
+    - _VignetteSth: 1.5
     - _ZWrite: 1
     - alpha: 1
     - arcFade: 0.05

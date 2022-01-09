@@ -9,6 +9,8 @@
         _MinimumAlpha("Minimum Alpha", Range(0, 0.99)) = 0.1
         _Color ("Tint", Color) = (1,1,1,1)
         _Noise("Noise", Range(0, 1)) = 1
+        _VignetteBoost("Vignette Boost", Float) = 1
+        _VignetteInverseScale("Vignette Inverse Scale", Float) = 3
 
         _StencilComp ("Stencil Comparison", Float) = 8
         _Stencil ("Stencil ID", Float) = 0
@@ -97,6 +99,9 @@
             float _GlitchIntensities[20];
             float _GlitchPositions[20];
 
+            float _VignetteBoost;
+            float _VignetteInverseScale;
+
             v2f vert(appdata_t v)
             {
                 v2f OUT;
@@ -120,6 +125,10 @@
 	            float random = dot(smallValue, dotDir);
 	            random = frac(sin(random) * 143758.5453) - 0.5;
 	            return random;
+            }
+
+            float SND(float x) {
+                return pow(2.71828, -x*x * 2);
             }
 
             fixed4 frag(v2f IN) : SV_Target
@@ -155,7 +164,15 @@
                 clip (color.a - 0.001);
                 #endif
 
-                return color * bandAlpha;
+                float2 vignetteUV = IN.texcoord;
+                vignetteUV -= 0.5;
+                vignetteUV *= _VignetteInverseScale;
+
+                float middleDistance = sqrt(vignetteUV.x * vignetteUV.x + vignetteUV.y * vignetteUV.y);
+                middleDistance = SND(middleDistance);
+                middleDistance = clamp(middleDistance * _VignetteBoost, 0, 1);
+                
+                return color * bandAlpha * middleDistance;
             }
         ENDCG
         }
