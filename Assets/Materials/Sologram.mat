@@ -91,7 +91,7 @@ Material:
     - radMax: 0.5
     - radMin: 0.35
     m_Colors:
-    - _Color: {r: 0.25157225, g: 0.65580136, b: 1, a: 1}
+    - _Color: {r: 0, g: 0.53926706, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - arcCol: {r: 0, g: 0, b: 0, a: 1}
     - background: {r: 1, g: 1, b: 1, a: 1}
