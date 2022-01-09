@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Sologram
-  m_Shader: {fileID: 4800000, guid: 1cc05a18d4450534588466a223dbc2d0, type: 3}
-  m_ShaderKeywords: 
+  m_Name: Skybox
+  m_Shader: {fileID: 106, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: _SUNDISK_HIGH_QUALITY
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -57,42 +57,30 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BandFrequency: 300
-    - _BandSharpness: 1.47
-    - _BandSpeed: -0.25
+    - _AtmosphereThickness: 5
     - _BumpScale: 1
-    - _ColorMask: 15
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _Exposure: 0.29
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Metallic: 0
-    - _MinimumAlpha: 0.373
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Stencil: 0
-    - _StencilComp: 8
-    - _StencilOp: 0
-    - _StencilReadMask: 255
-    - _StencilWriteMask: 255
+    - _SunDisk: 2
+    - _SunSize: 0
+    - _SunSizeConvergence: 1
     - _UVSec: 0
-    - _UseUIAlphaClip: 0
     - _ZWrite: 1
-    - alpha: 1
-    - arcFade: 0.05
-    - blur: 0.01
-    - progress: 1
-    - radMax: 0.5
-    - radMin: 0.35
     m_Colors:
-    - _Color: {r: 0.25157225, g: 0.65580136, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - arcCol: {r: 0, g: 0, b: 0, a: 1}
-    - background: {r: 1, g: 1, b: 1, a: 1}
+    - _GroundColor: {r: 0.20754719, g: 0.20754719, b: 0.20754719, a: 1}
+    - _SkyTint: {r: 0.07564968, g: 0.10338677, b: 0.14150941, a: 1}
   m_BuildTextureStacks: []
