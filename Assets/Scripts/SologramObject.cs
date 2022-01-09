@@ -8,7 +8,6 @@ namespace RectangleTrainer.Sologram
         [SerializeField] private SologramRenderer sologram;
 
         private RenderTexture rt;
-    
         private Camera cam;
 
         void Start() {

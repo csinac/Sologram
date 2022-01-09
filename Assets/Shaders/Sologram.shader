@@ -93,8 +93,9 @@
             fixed _Noise;
 
             int _GlitchCount;
-            float _GlitchIntensities[10];
-            float _GlitchPositions[10];
+            float _GlitchThickness;
+            float _GlitchIntensities[20];
+            float _GlitchPositions[20];
 
             v2f vert(appdata_t v)
             {
@@ -127,9 +128,12 @@
 
                 for(int i = 0; i < _GlitchCount; i++)
                 {
-                    if(abs(uv.y - _GlitchPositions[i]) < 0.02f)
+                    float dist = abs(uv.y - _GlitchPositions[i]);
+                    if(dist < _GlitchThickness)
                     {
-                        uv.x += _GlitchIntensities[i];
+                        float glitchFade = (_GlitchThickness - dist) / _GlitchThickness;
+                        glitchFade = pow(glitchFade, 2);
+                        uv.x += _GlitchIntensities[i] * glitchFade;
                     }
                 }
                 
