@@ -92,6 +92,10 @@
 
             fixed _Noise;
 
+            int _GlitchCount;
+            float _GlitchIntensities[10];
+            float _GlitchPositions[10];
+
             v2f vert(appdata_t v)
             {
                 v2f OUT;
@@ -120,6 +124,15 @@
             fixed4 frag(v2f IN) : SV_Target
             {
                 float2 uv = IN.texcoord;
+
+                for(int i = 0; i < _GlitchCount; i++)
+                {
+                    if(abs(uv.y - _GlitchPositions[i]) < 0.02f)
+                    {
+                        uv.x += _GlitchIntensities[i];
+                    }
+                }
+                
                 half4 pixel = tex2D(_MainTex, uv);
                 
                 half4 color = ((pixel + _TextureSampleAdd) + IN.color);
@@ -129,7 +142,6 @@
                 float bandAlpha = (sin((IN.texcoord.y + _Time * _BandSpeed) * _BandFrequency) + 1) / 2;
                 bandAlpha = pow(bandAlpha, _BandSharpness);
                 bandAlpha = (1-_MinimumAlpha) * bandAlpha + _MinimumAlpha;
-                //bandAlpha = clamp(bandAlpha + rand(IN.texcoord), 0, 1);
                 
                 #ifdef UNITY_UI_CLIP_RECT
                 color.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);
