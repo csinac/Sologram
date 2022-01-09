@@ -8,6 +8,7 @@
         _BandSpeed("Band Speed", Float) = 1
         _MinimumAlpha("Minimum Alpha", Range(0, 0.99)) = 0.1
         _Color ("Tint", Color) = (1,1,1,1)
+        _Noise("Noise", Range(0, 1)) = 1
 
         _StencilComp ("Stencil Comparison", Float) = 8
         _Stencil ("Stencil ID", Float) = 0
@@ -89,6 +90,8 @@
             fixed _BandSpeed;
             fixed _MinimumAlpha;
 
+            fixed _Noise;
+
             v2f vert(appdata_t v)
             {
                 v2f OUT;
@@ -103,14 +106,30 @@
                 return OUT;
             }
 
+            //https://gist.github.com/h3r/3a92295517b2bee8a82c1de1456431dc
+            float rand(float2 seed, float3 dotDir = float3(12.9898, 78.233, 37.719)){
+                float3 timedSeed;
+                timedSeed.xy = seed;
+                timedSeed.z = _Time;
+	            float3 smallValue = sin(timedSeed);
+	            float random = dot(smallValue, dotDir);
+	            random = frac(sin(random) * 143758.5453) - 0.5;
+	            return random;
+            }
+
             fixed4 frag(v2f IN) : SV_Target
             {
-                half4 color = ((tex2D(_MainTex, IN.texcoord) + _TextureSampleAdd) + IN.color) * tex2D(_MainTex, IN.texcoord).a;
-                color = clamp(color, 0, 1);
+                float2 uv = IN.texcoord;
+                half4 pixel = tex2D(_MainTex, uv);
+                
+                half4 color = ((pixel + _TextureSampleAdd) + IN.color);
+                color = clamp(color + rand(IN.texcoord) * _Noise, 0, 1);
+                color *= pixel.a;
 
                 float bandAlpha = (sin((IN.texcoord.y + _Time * _BandSpeed) * _BandFrequency) + 1) / 2;
                 bandAlpha = pow(bandAlpha, _BandSharpness);
                 bandAlpha = (1-_MinimumAlpha) * bandAlpha + _MinimumAlpha;
+                //bandAlpha = clamp(bandAlpha + rand(IN.texcoord), 0, 1);
                 
                 #ifdef UNITY_UI_CLIP_RECT
                 color.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);

@@ -57,8 +57,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BandFrequency: 300
-    - _BandSharpness: 1.47
+    - _BandFrequency: 900
+    - _BandSharpness: 1.03
     - _BandSpeed: -0.25
     - _BumpScale: 1
     - _ColorMask: 15
@@ -69,8 +69,9 @@ Material:
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Metallic: 0
-    - _MinimumAlpha: 0.373
+    - _MinimumAlpha: 0.5
     - _Mode: 0
+    - _Noise: 0.4
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
