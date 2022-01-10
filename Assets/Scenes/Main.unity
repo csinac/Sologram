@@ -712,7 +712,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rawImage: {fileID: 1109912263}
-  glitchCount: 5
+  glitchCount: 10
   glitchFrequency: 0.1
   glitchThickness: 0.015
   glitchIntensity: 0.02

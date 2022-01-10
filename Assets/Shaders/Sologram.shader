@@ -11,6 +11,8 @@
         _Noise("Noise", Range(0, 1)) = 1
         _VignetteBoost("Vignette Boost", Float) = 1
         _VignetteInverseScale("Vignette Inverse Scale", Float) = 3
+        _Brightness("Brightness", Float) = 0
+        _Contrast("Contrast", Float) = 1
 
         _StencilComp ("Stencil Comparison", Float) = 8
         _Stencil ("Stencil ID", Float) = 0
@@ -96,12 +98,15 @@
 
             int _GlitchCount;
             float _GlitchThickness;
-            float _GlitchIntensities[20];
-            float _GlitchPositions[20];
+            float _GlitchIntensities[10];
+            float _GlitchPositions[10];
 
             float _VignetteBoost;
             float _VignetteInverseScale;
 
+            fixed _Contrast;
+            fixed _Brightness;
+        
             v2f vert(appdata_t v)
             {
                 v2f OUT;
@@ -131,6 +136,16 @@
                 return pow(2.71828, -x*x * 2);
             }
 
+            half ApplyContrastUnclamped(half pixel)
+            {
+                return (pixel - 0.5) * _Contrast + 0.5;
+            }
+
+            half ApplyBrightnessUnclamped(half pixel)
+            {
+                return pixel + _Brightness;
+            }
+
             fixed4 frag(v2f IN) : SV_Target
             {
                 float2 uv = IN.texcoord;
@@ -147,8 +162,11 @@
                 }
                 
                 half4 pixel = tex2D(_MainTex, uv);
+                half average = (pixel.r + pixel.g + pixel.b) / 3;
+                average = ApplyContrastUnclamped(average);
+                average = ApplyBrightnessUnclamped(average);
                 
-                half4 color = ((pixel + _TextureSampleAdd) + IN.color);
+                half4 color = ((average + _TextureSampleAdd) + IN.color);
                 color = clamp(color + rand(IN.texcoord) * _Noise, 0, 1);
                 color *= pixel.a;
 
