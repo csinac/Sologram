@@ -58,12 +58,12 @@ Material:
     m_Ints: []
     m_Floats:
     - _BandFrequency: 900
-    - _BandSharpness: 1.03
+    - _BandSharpness: 1
     - _BandSpeed: -0.25
-    - _Brightness: -0.71
+    - _Brightness: -0.7
     - _BumpScale: 1
     - _ColorMask: 15
-    - _Contrast: 2.45
+    - _Contrast: 2.5
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -74,7 +74,7 @@ Material:
     - _Metallic: 0
     - _MinimumAlpha: 0.5
     - _Mode: 0
-    - _Noise: 0.4
+    - _Noise: 1
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _SmoothnessTextureChannel: 0
@@ -87,9 +87,9 @@ Material:
     - _StencilWriteMask: 255
     - _UVSec: 0
     - _UseUIAlphaClip: 0
-    - _VignetteBoost: 1.19
+    - _VignetteBoost: 1.2
     - _VignetteFoo: 0.5
-    - _VignetteInverseScale: 3.42
+    - _VignetteInverseScale: 3.4
     - _VignetteScale: 4.06
     - _VignetteSize: 0.1
     - _VignetteSpeed: 97.04
@@ -102,7 +102,7 @@ Material:
     - radMax: 0.5
     - radMin: 0.35
     m_Colors:
-    - _Color: {r: 0, g: 0.53926706, b: 1, a: 1}
+    - _Color: {r: 0, g: 0.53, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - arcCol: {r: 0, g: 0, b: 0, a: 1}
     - background: {r: 1, g: 1, b: 1, a: 1}

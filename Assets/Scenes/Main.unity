@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.22892001, g: 0.16566265, b: 0.06113211, a: 1}
+  m_IndirectSpecularColor: {r: 0.22892061, g: 0.16566253, b: 0.06113191, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -309,13 +309,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: -0.14454393, y: 0.8516508, z: -0.39713123, w: -0.30997548}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: 220, z: 0}
 --- !u!1 &710363266
 GameObject:
   m_ObjectHideFlags: 0
@@ -712,10 +712,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rawImage: {fileID: 1109912263}
+  realtimeUpdate: 0
+  bandFrequency: 900
+  bandSharpness: 1
+  bandSpeed: -0.25
   glitchCount: 10
   glitchFrequency: 0.1
   glitchThickness: 0.015
   glitchIntensity: 0.02
+  tint: {r: 0, g: 0.53, b: 1, a: 1}
+  noise: 1
+  brightness: -0.7
+  contrast: 2.5
+  vignetteBoost: 1.2
+  vignetteInverseScale: 3.4
 --- !u!114 &1995048948
 MonoBehaviour:
   m_ObjectHideFlags: 0
