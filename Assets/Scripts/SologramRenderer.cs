@@ -20,8 +20,8 @@ namespace RectangleTrainer.Sologram
         [SerializeField, Min(0)] private float glitchFrequency = 0.1f;
         [SerializeField, Range(0, 1)] private float glitchThickness = 0.01f;
         [SerializeField, Range(0.01f, 0.5f)] private float glitchIntensity = 0.1f;
-
-        [Header("Color Adjustment")]
+        [Header("Image")]
+        [SerializeField] private int size = 512;
         [SerializeField] private Color tint = new Color(0, 0.53f, 1f);
         [SerializeField, Range(0f, 1f)] private float noise = 1f;
         [SerializeField] private float brightness = -0.7f;
@@ -35,6 +35,7 @@ namespace RectangleTrainer.Sologram
             get => rawImage.texture;
             set => rawImage.texture = value;
         }
+        public int Size => size;
 
         private static readonly int GlitchIntensities = Shader.PropertyToID("_GlitchIntensities");
         private static readonly int GlitchPositions = Shader.PropertyToID("_GlitchPositions");
@@ -57,6 +58,7 @@ namespace RectangleTrainer.Sologram
 
         void Start() {
             mainCam = Camera.main;
+            
             rawImage.material.SetFloatArray(GlitchIntensities, new float[MAX_GLITCHES]);
             rawImage.material.SetFloatArray(GlitchPositions, new float[MAX_GLITCHES]);
 

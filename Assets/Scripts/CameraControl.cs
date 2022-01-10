@@ -1,31 +1,53 @@
+using System;
 using UnityEngine;
 
 namespace RectangleTrainer.Sologram.Control
 {
     public class CameraControl : MonoBehaviour
     {
-        public enum RotationAxes
+        [SerializeField] private bool demoMode = false;
+        [SerializeField] private Transform demoCenter;
+
+        [SerializeField] private RotationAxes axes = RotationAxes.MouseXAndY;
+        [SerializeField] private float sensitivityX = 5f;
+        [SerializeField] private float sensitivityY = 5f;
+
+        [SerializeField] private float minimumX = -360f;
+        [SerializeField] private float maximumX = 360f;
+
+        [SerializeField] private float minimumY = -60f;
+        [SerializeField] private float maximumY = 60f;
+
+        [SerializeField] private float moveSpeed = 0.01f;
+
+        private float rotationY = 0f;
+
+        private Vector3 start;
+        
+        private void Start() {
+            start = transform.position;
+        }
+        
+        Vector3 RotateOnY(Vector3 p, Vector3 center, float angle)
         {
-            MouseXAndY = 0,
-            MouseX = 1,
-            MouseY = 2
+            float s = Mathf.Sin(angle);
+            float c = Mathf.Cos(angle);
+
+            float x = p.x - center.x;
+            float z = p.z - center.z;
+
+            x = p.x * c - p.z * s + center.x;
+            z = p.x * s + p.z * c + center.z;
+
+            return new Vector3(x, p.y + Mathf.Sin(angle * 2) * 2, z);
         }
 
-        public RotationAxes axes = RotationAxes.MouseXAndY;
-        public float sensitivityX = 5f;
-        public float sensitivityY = 5f;
-
-        public float minimumX = -360f;
-        public float maximumX = 360f;
-
-        public float minimumY = -60f;
-        public float maximumY = 60f;
-
-        public float moveSpeed = 0.01f;
-
-        float rotationY = 0f;
-
         void Update() {
+            if (demoMode) {
+                transform.position = RotateOnY(start, demoCenter.position, Time.time);
+                transform.LookAt(demoCenter);
+                return;
+            }
             if (Input.GetMouseButton(1)) {
                 if (axes == RotationAxes.MouseXAndY) {
                     float rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityX;
@@ -51,6 +73,13 @@ namespace RectangleTrainer.Sologram.Control
             float elevate = Input.GetAxis("Elevate");
 
             transform.position += transform.forward * (vertical * moveSpeed) + transform.right * (horizontal * moveSpeed) + transform.up * (elevate * moveSpeed);
+        }
+        
+        private enum RotationAxes
+        {
+            MouseXAndY = 0,
+            MouseX = 1,
+            MouseY = 2
         }
     }
 }

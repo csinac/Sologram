@@ -122,6 +122,7 @@ MonoBehaviour:
   glitchFrequency: 0.1
   glitchThickness: 0.015
   glitchIntensity: 0.02
+  size: 512
   tint: {r: 0, g: 0.53, b: 1, a: 1}
   noise: 1
   brightness: -0.7
